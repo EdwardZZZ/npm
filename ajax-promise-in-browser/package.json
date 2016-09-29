@@ -1,6 +1,6 @@
 {
   "name": "ajax-promise-in-browser",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "ajax promise, browser support promise. 浏览器支持promise的ajax",
   "main": "Ajax.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/EdwardZZZ/ajax-promise-in-browser"
   },
-  "keywords": [],
+  "keywords": ["ajax", "promise", "ajax-promise"],
   "author": "edwardzzz@foxmail.com",
   "dependencies": {
   }

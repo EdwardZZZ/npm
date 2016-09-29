@@ -1,0 +1,16 @@
+{
+  "name": "match-url",
+  "version": "1.0.0",
+  "description": " matching for url paths and query parameters, 根据路径和正则匹配返回匹配结果",
+  "main": "MatchUrl.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EdwardZZZ/npm/match-url"
+  },
+  "keywords": ["RegExp", "match", "url"],
+  "author": "edwardzzz@foxmail.com",
+  "dependencies": {
+  }
+}

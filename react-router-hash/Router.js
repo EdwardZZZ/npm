@@ -1,6 +1,8 @@
 var React = require('react')
 var ReactDom = require('react-dom')
 
+var match = require('match-url')
+
 var Router = React.createClass( {
     getInitialState() {
         return {
@@ -24,23 +26,11 @@ var Router = React.createClass( {
         if (!Child) {
             var _routesKeys = Object.keys(_routers)
             for (var i = 0, len = _routesKeys.length; i < len; i++) {
-                routeParams = {}
-                var _routeKey = _routesKeys[i],
-                    _matchFlag = true,
-                    _routeKeyReg = _routeKey.replace(/{([^{}]+)}/g, (m1, m2) => {
-                        _matchFlag = false
-                        routeParams[m2] = null
-                        return '([^\/]+)'
-                    })
-                if(_matchFlag) continue
-                
-                var _params = new RegExp('^' + _routeKeyReg + '$/g').exec(this.state.route)
-                if(_params){
+                var _routeKey = _routesKeys[i]
+                routeParams = match[this.props.sign==='colon'?'byColon':'byBraces'](this.state.route, _routeKey)
+
+                if(routeParams){
                     Child = _routers[_routeKey]
-                    var _i = 1
-                    for (var k in routeParams) {
-                        routeParams[k] = _params[_i++]
-                    }
                     break
                 }
             }
