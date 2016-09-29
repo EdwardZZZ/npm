@@ -1,2 +1,3 @@
-# npm
-some demo publish npm
+# README
+
+觉得有用的给颗星再走吧，感谢！

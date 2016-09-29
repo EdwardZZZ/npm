@@ -1,12 +1,12 @@
 {
   "name": "ajax-promise-simple",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "ajax base promise, 浏览器不支持promise的ajax",
   "main": "Ajax.js",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/EdwardZZZ/ajax-promise-simple"
+    "url": "https://github.com/EdwardZZZ/npm/ajax-promise-simple"
   },
   "keywords": ["ajax", "promise", "ajax-promise"],
   "author": "edwardzzz@foxmail.com",
