@@ -1,0 +1,16 @@
+{
+  "name": "react-router-hash",
+  "version": "1.0.3",
+  "description": "A react simple router, React极简路由",
+  "main": "Router.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EdwardZZZ/react-simple-router"
+  },
+  "keywords": [],
+  "author": "edwardzzz@foxmail.com",
+  "dependencies": {
+  }
+}
