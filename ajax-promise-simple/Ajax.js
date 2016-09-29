@@ -2,10 +2,10 @@
 var Promise = require('promise')
 
 var Ajax = {
-    get(url, params) {
+    get: function(url, params) {
         return this._ajax('GET', url, params)
     },
-    post(url, params) {
+    post: function(url, params) {
         return this._ajax('POST', url, params)
     },
     _ajax: function(method, url, args) {

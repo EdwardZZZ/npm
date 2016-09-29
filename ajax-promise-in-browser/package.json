@@ -1,6 +1,6 @@
 {
   "name": "ajax-promise-in-browser",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "ajax promise, browser support promise. 浏览器支持promise的ajax",
   "main": "Ajax.js",
   "scripts": {
