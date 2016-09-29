@@ -1,17 +1,23 @@
 'use strict';
 var Ajax = {
-    get: function(url, params) {
+    get: function (url, params) {
         return this._ajax('GET', url, params)
     },
-    post: function(url, params) {
+    getJSON: function (url, params) {
+        return this._ajax('GET', url, params, true)
+    },
+    post: function (url, params) {
         return this._ajax('POST', url, params)
     },
-    _ajax: function(method, url, args) {
-        return new Promise(function(resolve, reject) {
+    postJSON: function (url, params) {
+        return this._ajax('POST', url, params, true)
+    },
+    _ajax: function (method, url, args, json) {
+        return new Promise(function (resolve, reject) {
             var client = new XMLHttpRequest();
             var uri = url,
-            params = '',
-            postFlag = (method === 'POST' || method === 'PUT');
+                params = '',
+                postFlag = (method === 'POST' || method === 'PUT');
             if (args) {
                 uri += '?';
                 var argcount = 0;
@@ -25,17 +31,18 @@ var Ajax = {
                 }
                 uri += params
             }
-            client.open(method, postFlag ? url: uri);
+            client.open(method, postFlag ? url : uri);
             postFlag && client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            client.send(postFlag ? params: null);
-            client.onload = function() {
+            client.send(postFlag ? params : null);
+            client.onload = function () {
                 if (this.status >= 200 && this.status < 300) {
-                    resolve(this.response);
+                    console.log(json)
+                    resolve(json ? JSON.parse(this.response) : this.response);
                 } else {
                     reject(this.statusText);
                 }
             };
-            client.onerror = function() {
+            client.onerror = function () {
                 reject(this.statusText);
             };
         });
