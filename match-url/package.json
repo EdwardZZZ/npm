@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EdwardZZZ/npm/match-url"
+    "url": "https://github.com/EdwardZZZ/npm"
   },
   "keywords": ["RegExp", "match", "url"],
   "author": "edwardzzz@foxmail.com",
