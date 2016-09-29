@@ -14,7 +14,9 @@ browse supports promise see <https://www.npmjs.com/package/ajax-promise-in-brows
 
 ###ES5
 ```javascipt
-    ajax.post('http://***/login', 
+    var ajax = require('ajax-promise-simple')
+
+    ajax.get('http://***/login', 
         {username:aaa, password:123456})
     .then(function(data){
     })

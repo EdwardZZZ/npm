@@ -1,6 +1,6 @@
 {
   "name": "ajax-promise-simple",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "ajax base promise, 浏览器不支持promise的ajax",
   "main": "Ajax.js",
   "scripts": {},
