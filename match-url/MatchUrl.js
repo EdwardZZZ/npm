@@ -5,10 +5,10 @@ var MatchUrl = {
     byColon: function (url, reg) {
         return this.match(url, reg, /:([^\/]+)/g)
     },
-    match:function (url, reg, type) {
+    match: function (url, reg, type) {
         var params = {},
             _matchFlag = true,
-            _paramReg = reg.replace(type, (m1, m2) => {
+            _paramReg = reg.replace(type, function (m1, m2) {
                 _matchFlag = false
                 params[m2] = null
                 return '([^\/]+)'
