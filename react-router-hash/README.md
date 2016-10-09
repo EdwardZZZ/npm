@@ -23,8 +23,8 @@ render((
 let routers = {
     'login': Login,
     'list': List,
-    'list/{pn}': List,
-    'detail/{id}': Detail,
+    'list/:pn': List,
+    'detail/:id': Detail,
     'default': Login
 }
 render((
@@ -52,8 +52,8 @@ let routers = {
 // let routers = {
 //     'login': Login,
 //     'list': List,
-//     'list/{pn}': List,
-//     'detail/{id}': Detail,
+//     'list/:pn': List,
+//     'detail/:id': Detail,
 //     'default': Login
 // }
 
