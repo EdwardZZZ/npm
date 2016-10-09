@@ -12,8 +12,9 @@ match-url可以根据路径和正则匹配返回匹配结果，可以有下面�
 ```javascipt
 var MatchUrl = require('match-url')
 
-var url = '/path/abcd'
+var url = '/path/12'
 
-MatchUrl.byBraces(url, '/path/{path1}')
-MatchUrl.byColon(url, '/path/:path1')
+MatchUrl.byBraces(url, '/path/{pn}')    // return {pn: '2'}
+MatchUrl.byBraces(url, '/path/{pn:\\d+}')   // return {pn: 2}
+MatchUrl.byColon(url, '/path/:pn')      // return {pn: '2'}
 ```
