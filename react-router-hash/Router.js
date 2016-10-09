@@ -4,26 +4,31 @@ var ReactDom = require('react-dom')
 var match = require('match-url')
 
 var Router = React.createClass({
-    getInitialState() {
+    getInitialState: function () {
         return {
-            route: window.location.hash.substr(1)
+            route: this.getHash()
         }
     },
 
-    componentWillMount() {
+    getHash: function () {
+        return window.location.hash.substr(1)
+    },
+
+    componentWillMount: function () {
         this.routers = Object.assign({}, this.props.routers)
         this.matchRoutes = []
     },
 
-    componentDidMount() {
-        window.addEventListener('hashchange', () => {
-            this.setState({
-                route: window.location.hash.substr(1)
+    componentDidMount: function () {
+        var self = this
+        window.addEventListener('hashchange', function () {
+            self.setState({
+                route: self.getHash()
             })
         })
     },
 
-    render() {
+    render: function () {
         var _routers = this.routers,
             Child = this.state.route ? _routers[this.state.route] : _routers['default'],
             routeParams = {},
