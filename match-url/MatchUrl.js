@@ -10,25 +10,25 @@ var MatchUrl = {
     byColon: function (url, reg) {
         return this.match(url, reg, 'colon')
     },
-    getRegAndKeys: function(reg, type){
+    getRegAndKeys: function (reg, type) {
         var paramKeys = [],
-            paramReg = reg.replace(matchType[type], function (m1, m2) {
+            paramReg = reg.replace(matchType[type] || matchType['braces'], function (m1, m2) {
                 paramKeys[paramKeys.length] = m2
                 return '([^\/]+)'
             })
-        if(paramKeys.length === 0) return
+        if (paramKeys.length === 0) return
         return {
             paramReg: paramReg,
             paramKeys: paramKeys
         }
     },
-    matchResult: function(url, paramKeys, paramReg){
+    matchResult: function (url, paramKeys, paramReg) {
         var params = {},
             paramsVals = new RegExp('^' + paramReg + '$').exec(url)
         if (paramsVals) {
             var _i = 1
-            for (var i=0, len=paramKeys.length; i< len; i++) {
-                params[paramKeys[i]] = paramsVals[i+1]
+            for (var i = 0, len = paramKeys.length; i < len; i++) {
+                params[paramKeys[i]] = paramsVals[i + 1]
             }
             return params
         }

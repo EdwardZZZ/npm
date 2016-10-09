@@ -45,7 +45,7 @@ var Router = React.createClass({
             var _routesKeys = Object.keys(_routers)
             for (var i = 0, len = _routesKeys.length; i < len; i++) {
                 var _routeKey = _routesKeys[i]
-                var ret = match.getRegAndKeys(_routeKey, this.props.sign === 'colon' ? 'colon' : 'braces')
+                var ret = match.getRegAndKeys(_routeKey, this.props.sign || 'braces')
 
                 if (!ret) continue
                 var paramReg = ret.paramReg, paramKeys = ret.paramKeys, component = _routers[_routeKey]
