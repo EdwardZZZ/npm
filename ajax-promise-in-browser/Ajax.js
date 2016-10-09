@@ -36,7 +36,6 @@ var Ajax = {
             client.send(postFlag ? params : null);
             client.onload = function () {
                 if (this.status >= 200 && this.status < 300) {
-                    console.log(json)
                     resolve(json ? JSON.parse(this.response) : this.response);
                 } else {
                     reject(this.statusText);
