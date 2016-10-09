@@ -1,29 +1,43 @@
+var matchType = {
+    braces: /{([^{}]+)}/g,
+    colon: /:([^\/]+)/g
+}
+
 var MatchUrl = {
     byBraces: function (url, reg) {
-        return this.match(url, reg, /{([^{}]+)}/g)
+        return this.match(url, reg, 'braces')
     },
     byColon: function (url, reg) {
-        return this.match(url, reg, /:([^\/]+)/g)
+        return this.match(url, reg, 'colon')
     },
-    match: function (url, reg, type) {
-        var params = {},
-            _matchFlag = true,
-            _paramReg = reg.replace(type, function (m1, m2) {
-                _matchFlag = false
-                params[m2] = null
+    getRegAndKeys: function(reg, type){
+        var paramKeys = [],
+            paramReg = reg.replace(matchType[type], function (m1, m2) {
+                paramKeys[paramKeys.length] = m2
                 return '([^\/]+)'
             })
-        if (_matchFlag) return null
-
-        var _params = new RegExp('^' + _paramReg + '$').exec(url)
-        if (_params) {
+        if(paramKeys.length === 0) return
+        return {
+            paramReg: paramReg,
+            paramKeys: paramKeys
+        }
+    },
+    matchResult: function(url, paramKeys, paramReg){
+        var params = {},
+            paramsVals = new RegExp('^' + paramReg + '$').exec(url)
+        if (paramsVals) {
             var _i = 1
-            for (var k in params) {
-                params[k] = _params[_i++]
+            for (var i=0, len=paramKeys.length; i< len; i++) {
+                params[paramKeys[i]] = paramsVals[i+1]
             }
             return params
         }
         return null
+    },
+    match: function (url, reg, type) {
+        var ret = this.getRegAndKeys(reg, type)
+        if (!ret) return null
+        return this.matchResult(url, ret.paramKeys, ret.paramReg)
     }
 }
 
