@@ -19,4 +19,14 @@ var url = '/path/12'
 MatchUrl.byBraces(url, '/path/{pn}')    // return {pn: '2'}
 MatchUrl.byBraces(url, '/path/{pn:\\d+}')   // return {pn: 2}
 MatchUrl.byColon(url, '/path/:pn')      // return {pn: '2'}
+
+
+
+var ret = MatchUrl.getRegAndKeys('/path/{pn:\\d+}') 
+console.log(ret)
+//{paramKeys:[{key:"pn", type:"int"}], paramReg: "/path/(\\d+)"}
+
+var params = MatchUrl.matchResult(url, ret.paramKeys, ret.paramReg) //
+console.log(params)
+//{pn:12}
 ```
