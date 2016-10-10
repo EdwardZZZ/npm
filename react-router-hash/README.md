@@ -43,12 +43,14 @@ import Router from 'react-router-hash';
 import Login from './components/Login';
 import List from './components/List';
 import Detail from './components/Detail';
+import Aboutus from './components/Aboutus';
 
 let routers = {
     'login': Login,
     'list': List,
     'list/{pn}': List,
     'detail/{id}': Detail,
+    'about': Aboutus,
     'default': Login
 }
 
@@ -61,7 +63,26 @@ let routers = {
 // }
 
 render((
-    <Router routers={routers}  />
+    <div>
+        <div>
+            <a href="#login">login</a>
+            <a href="#list">list</a>
+            <a href="#aboutus">aboutus</a>
+        </div>
+        <Router routers={routers}  />
+    </div>
 ), document.getElementById('app'));
+
+//List.jsx
+export default class List extends React.Component {
+    constructor(props) {
+        super();
+    }
+    render(){
+        // get pn value
+        console.log(this.props.pn)
+    }
+}
+
 ```
 
