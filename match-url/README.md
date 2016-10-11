@@ -19,6 +19,7 @@ var url = '/path/12'
 MatchUrl.byBraces(url, '/path/{pn}')    // return {pn: '2'}
 MatchUrl.byBraces(url, '/path/{pn:\\d+}')   // return {pn: 2}
 MatchUrl.byColon(url, '/path/:pn')      // return {pn: '2'}
+MatchUrl.byColon(url, '/path/:pn(\\d{2})')      // return {pn: 2}
 
 
 

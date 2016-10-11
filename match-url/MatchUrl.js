@@ -1,6 +1,6 @@
 var matchType = {
     braces: /{([^{}]+)}/g,
-    colon: /:([^\/]+)/g
+    colon: /:(([^\/\(\)]+)(\(([^\/]+)\))?)/g
 }
 
 var MatchUrl = {
@@ -13,15 +13,30 @@ var MatchUrl = {
     getRegAndKeys: function (reg, type) {
         var paramKeys = [],
             type = type || 'braces',
-            paramReg = reg.replace(matchType[type], function (m1, m2) {
+            paramReg = reg.replace(matchType[type], function () {
                 if (type === 'braces') {
-                    var arr = m2.split(':')
+                    var arr = arguments[1].split(':')
                     if (arr.length === 2) {
-                        paramKeys[paramKeys.length] = { key: arr[0], type: 'int' }
+                        var _paramKey = { key: arr[0] }
+                        if(arr[1].indexOf('d') > -1){
+                            _paramKey.type = 'int' 
+                        }
+                        paramKeys[paramKeys.length] = _paramKey
                         return '(' + arr[1] + ')'
                     }
                 }
-                paramKeys[paramKeys.length] = { key: m2 }
+                if (type === 'colon') {
+                    var _type = arguments[4]
+                    if(_type !== void 0){
+                        var _paramKey = { key: arguments[2] }
+                        if(_type.indexOf('d') > -1){
+                            _paramKey.type = 'int' 
+                        }
+                        paramKeys[paramKeys.length] = _paramKey
+                        return '(' + _type + ')'
+                    }
+                }
+                paramKeys[paramKeys.length] = { key: arguments[1] }
                 return '([^\/]+)'
             })
         if (paramKeys.length === 0) return

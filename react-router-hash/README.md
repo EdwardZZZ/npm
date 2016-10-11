@@ -26,7 +26,7 @@ render((
 let routers = {
     'login': Login,
     'list': List,
-    'list/:pn': List,
+    'list/:pn(\\d+)': List,
     'detail/:id': Detail,
     'default': Login
 }
@@ -49,18 +49,22 @@ let routers = {
     'login': Login,
     'list': List,
     'list/{pn}': List,
+    // 'list/{pn:\\d+}': List,
     'detail/{id}': Detail,
-    'about': Aboutus,
-    'about/{type}': Aboutus,    //switch type 根据type值在Aboutus内做逻辑操作
-    'default': Login
+    'detail/{id}/': Detail,
+    'default': Login,
+    'aboutus':Aboutus,
+    'aboutus/{a:\\S+}':Aboutus
 }
 
 // let routers = {
 //     'login': Login,
 //     'list': List,
-//     'list/:pn': List,
-//     'detail/:id': Detail,
-//     'default': Login
+//     // 'list/:pn': List,
+//     'list/:pn(\\d+)': List,
+//     'default': Login,
+//     'aboutus':Aboutus,
+//     'aboutus/:a(\\S+)':Aboutus
 // }
 
 render((
@@ -70,7 +74,7 @@ render((
             <a href="#list">list</a>
             <a href="#aboutus">aboutus</a>
         </div>
-        <Router routers={routers}  />
+        <Router1 routers={routers} /* sign="colon" */ />
     </div>
 ), document.getElementById('app'));
 
