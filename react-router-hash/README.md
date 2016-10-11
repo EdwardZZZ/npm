@@ -14,6 +14,7 @@ let routers = {
     'list': List,
     'list/{pn}': List,
     'detail/{id:\\d+}': Detail,
+    'about/{type}': Aboutus,    //switch type 根据type值在Aboutus内做逻辑操作
     'default': Login
 }
 render((
