@@ -63,7 +63,7 @@ var Router = React.createClass({
 
     matchRouter: function (route) {
         var _routers = this.routers, _route = route || this.state.route
-            Component = _route ? _routers[_route] : _routers['default'],
+        Component = _route ? _routers[_route] : _routers['default'],
             routeParams = {},
             matchRoutesLen = this.matchRoutes.length
 
@@ -103,8 +103,8 @@ var Router = React.createClass({
             Component = _routers['default']
         }
 
-        this.Component = Component,
-            this.routeParams = routeParams
+        this.Component = Component
+        this.routeParams = routeParams
     },
 
     render: function () {
