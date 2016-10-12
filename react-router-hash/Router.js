@@ -14,9 +14,37 @@ var Router = React.createClass({
         return window.location.hash.substr(1)
     },
 
+    isArray: function (obj) {
+        return Array.isArray ? Array.isArray(obj) : Util.type(obj) === '[object Array]';
+    },
+
+    toArray: function (obj) {
+        if (!obj || this.isArray(obj)) {
+            return obj
+        }
+        return new Array(obj)
+    },
+
+    addToRouters: function (routers, path, children) {
+        if (!children) return
+        var self = this
+        this.toArray(children).forEach(function (router) {
+            var _path = path + router.props.path
+            routers[_path] = router.type
+            self.addToRouters(routers, _path, router.props.children)
+        })
+    },
+
     componentWillMount: function () {
-        this.routers = Object.assign({}, this.props.routers)
-        this.matchRoutes = []
+        var _routers = {}, self = this
+        if (self.props.children) {
+            self.addToRouters(_routers, '', self.props.children)
+        } else {
+            Object.assign(_routers, self.props.routers)
+        }
+        self.routers = _routers
+        self.matchRoutes = []
+        self.matchRouter()
     },
 
     componentDidMount: function () {
@@ -28,29 +56,34 @@ var Router = React.createClass({
         })
     },
 
-    render: function () {
-        var _routers = this.routers,
-            Child = this.state.route ? _routers[this.state.route] : _routers['default'],
+    shouldComponentUpdate: function () {
+        this.matchRouter(arguments[1].route)
+        return !!this.Component
+    },
+
+    matchRouter: function (route) {
+        var _routers = this.routers, _route = route || this.state.route
+            Component = _route ? _routers[_route] : _routers['default'],
             routeParams = {},
             matchRoutesLen = this.matchRoutes.length
 
-        if (!Child && matchRoutesLen !== 0) {
+        if (!Component && matchRoutesLen !== 0) {
             for (var i = 0; i < matchRoutesLen; i++) {
-                var _router = this.matchRoutes[i]
-                var paramReg = _router.paramReg, paramKeys = _router.paramKeys, component = _router.component
-                var routeParams = match.matchResult(this.state.route, paramKeys, paramReg)
+                var _router = this.matchRoutes[i],
+                    paramReg = _router.paramReg, paramKeys = _router.paramKeys, component = _router.component,
+                    routeParams = match.matchResult(_route, paramKeys, paramReg)
                 if (routeParams) {
-                    Child = component
+                    Component = component
                     break
                 }
             }
         }
 
-        if (!Child) {
+        if (!Component) {
             var _routesKeys = Object.keys(_routers)
             for (var i = 0, len = _routesKeys.length; i < len; i++) {
-                var _routeKey = _routesKeys[i]
-                var ret = match.getRegAndKeys(_routeKey, this.props.sign || 'braces')
+                var _routeKey = _routesKeys[i],
+                    ret = match.getRegAndKeys(_routeKey, this.props.sign)
 
                 if (!ret) continue
                 var paramReg = ret.paramReg, paramKeys = ret.paramKeys, component = _routers[_routeKey]
@@ -58,19 +91,24 @@ var Router = React.createClass({
 
                 delete _routers[_routeKey]
 
-                var routeParams = match.matchResult(this.state.route, paramKeys, paramReg)
+                var routeParams = match.matchResult(_route, paramKeys, paramReg)
                 if (routeParams) {
-                    Child = component
+                    Component = component
                     break
                 }
             }
         }
 
-        if (!Child) {
-            Child = _routers['default']
+        if (!Component) {
+            Component = _routers['default']
         }
 
-        return React.createElement(Child, routeParams)
+        this.Component = Component,
+            this.routeParams = routeParams
+    },
+
+    render: function () {
+        return React.createElement(this.Component, this.routeParams)
     }
 })
 
