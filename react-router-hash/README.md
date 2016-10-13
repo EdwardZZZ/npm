@@ -9,7 +9,7 @@ React极简路由，仅支持hash url,可以采用两种方式进行路由配置
 
 第一种支持嵌套格式
 
-##第一种 没有default配置
+##第一种 支持嵌套格式
 ```javascript
 render((
     <Router default={Login} /* sign="colon" */>
@@ -28,7 +28,7 @@ render((
 ), document.getElementById('app'));
 ```
 
-##第二种 可以有default配置
+##第二种 
 ```javascript
 let routers = {
     'login': Login,
