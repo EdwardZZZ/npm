@@ -109,6 +109,7 @@ var Router = React.createClass({
     },
 
     render: function () {
+        if(!this.Component)throw new Error('This route has not match component.', this.state.route)
         return React.createElement(this.Component, this.routeParams)
     }
 })
