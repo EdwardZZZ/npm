@@ -63,8 +63,8 @@ var Router = React.createClass({
     },
 
     matchRouter: function (route) {
-        route = route || '/'
-        var _routers = this.routers, _route = route || this.state.route,
+        var _routers = this.routers, 
+            _route = (route === void 0 || route === '') ? '/' : route,
             Component = _route ? _routers[_route] : _routers['/'],
             routeParams = {},
             matchRoutesLen = this.matchRoutes.length
