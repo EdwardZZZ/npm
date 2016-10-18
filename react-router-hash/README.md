@@ -13,7 +13,7 @@ React极简路由，仅支持hash url,可以采用两种方式进行路由配置
 ```javascript
 render((
     <Router root={Login} default={Login} /* sign="colon" */>    /*root配置根地址*/
-        <Login path="/" />
+        <Login path="/" />  /*root配置也可以采用这种方式*/
         <List path="list">
             <List path="/{pn:\\d+}">
         </List>
