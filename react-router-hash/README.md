@@ -12,8 +12,8 @@ React极简路由，仅支持hash url,可以采用两种方式进行路由配置
 ##第一种 支持嵌套格式
 ```javascript
 render((
-    <Router default={Login} /* sign="colon" */>
-        <Login path="login" />
+    <Router root={Login} default={Login} /* sign="colon" */>    /*root配置根地址*/
+        <Login path="/" />
         <List path="list">
             <List path="/{pn:\\d+}">
         </List>
@@ -31,7 +31,7 @@ render((
 ##第二种 
 ```javascript
 let routers = {
-    'login': Login,
+    '/': Login,     /*  '/'配置根地址 */
     'list': List,
     // 'list/:pn': List,
     'list/:pn(\\d+)': List,
@@ -56,7 +56,7 @@ import Detail from './components/Detail';
 import Aboutus from './components/Aboutus';
 
 let routers = {
-    'login': Login,
+    '/': Login,
     'list': List,
     'list/{pn}': List,
     // 'list/{pn:\\d+}': List,
@@ -70,7 +70,7 @@ let routers = {
 render((
     <div>
         <div>
-            <a href="#login">login</a>
+            <a href="#">login</a>
             <a href="#list">list</a>
             <a href="#aboutus">aboutus</a>
         </div>
