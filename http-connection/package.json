@@ -1,0 +1,16 @@
+{
+  "name": "http-connection",
+  "version": "0.0.1",
+  "description": " http-connection load http content, 获取网络连接数据",
+  "main": "httpConnection.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EdwardZZZ/npm"
+  },
+  "keywords": ["http", "connent", "connnection", "url"],
+  "author": "edwardzzz@foxmail.com",
+  "dependencies": {
+  }
+}
