@@ -3,18 +3,18 @@ var url = require('url')
 var querystring = require('querystring')
 
 function httpConnection(u) {
-    var _url = u ? url.parse(u) : {}
-
-    var options = {
-        hostname: _url.hostname,
-        port: _url.port || 80,
-        path: _url.path,
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
+    var _url = u ? url.parse(u) : {},
+        sendData,
+        options = {
+            hostname: _url.hostname,
+            port: _url.port || 80,
+            path: _url.path,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
+            }
         }
-    }
 
     var getContent = function (cb) {
         var req = http.request(options, function (res) {
@@ -36,7 +36,9 @@ function httpConnection(u) {
             console.log('problem with request:', e.message)
         })
 
-        options.data && req.write(options.data)
+        if (sendData && options.method.toLowerCase() === 'post') {
+            req.write(sendData)
+        }
 
         req.end()
     }
@@ -57,7 +59,7 @@ function httpConnection(u) {
             return this
         },
         data: function (_data) {
-            options.data = querystring.stringify(_data)
+            sendData = querystring.stringify(_data)
             return this
         },
         config: function (_config) {
@@ -65,7 +67,7 @@ function httpConnection(u) {
             return this
         },
         getData: function (cb) {
-            cb && cb(options.data)
+            cb && cb(sendData)
             return this
         },
         getConfig: function (cb) {
