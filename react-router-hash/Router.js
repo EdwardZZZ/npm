@@ -3,6 +3,8 @@ var ReactDom = require('react-dom')
 
 var match = require('match-url')
 
+require('./Assign')
+
 var Router = React.createClass({
     getInitialState: function () {
         return {
