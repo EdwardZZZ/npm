@@ -5,13 +5,7 @@ var match = require('match-url')
 
 require('./Assign')
 
-var Router = React.createClass({
-    getInitialState: function () {
-        return {
-            route: this.getHash()
-        }
-    },
-
+var utils = {
     getHash: function () {
         return window.location.hash.substr(1)
     },
@@ -21,16 +15,24 @@ var Router = React.createClass({
     },
 
     toArray: function (obj) {
-        if (!obj || this.isArray(obj)) {
+        if (!obj || utils.isArray(obj)) {
             return obj
         }
         return new Array(obj)
+    },
+}
+
+var Router = React.createClass({
+    getInitialState: function () {
+        return {
+            route: util.getHash()
+        }
     },
 
     addToRouters: function (routers, path, children) {
         if (!children) return
         var self = this
-        this.toArray(children).forEach(function (router) {
+        utils.toArray(children).forEach(function (router) {
             var _path = path + router.props.path
             routers[_path] = router.type
             self.addToRouters(routers, _path, router.props.children)
@@ -54,7 +56,7 @@ var Router = React.createClass({
         var self = this
         window.addEventListener('hashchange', function () {
             self.setState({
-                route: self.getHash()
+                route: utils.getHash()
             })
         })
     },
