@@ -16,7 +16,7 @@ var MatchUrl = {
             paramReg = reg.replace(matchType[type], function () {
                 if (type === 'braces') {
                     var arr = arguments[1].split(':')
-                    if (arr.length === 2) {
+                    if (arguments[1].indexOf(':') > -1) {
                         var _paramKey = { key: arr[0] }
                         if(arr[1].indexOf('d') > -1){
                             _paramKey.type = 'int' 
