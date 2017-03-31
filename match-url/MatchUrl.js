@@ -47,6 +47,7 @@ var MatchUrl = {
     },
     matchResult: function (url, paramKeys, paramReg) {
         var params = {},
+            url = url.indexOf('?') > -1 ? url.substring(0, url.indexOf('?')) : url,
             paramsVals = new RegExp('^' + paramReg + '$').exec(url)
         if (paramsVals) {
             var _i = 1
