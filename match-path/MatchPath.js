@@ -19,6 +19,7 @@ function MatchPath(regexp, keys) {
     return {
         match: function (path) {
             var params = {},
+                path = path.indexOf('?') > -1 ? path.substring(0, path.indexOf('?')) : path,
                 paramsVals = new RegExp('^' + paramReg + '$').exec(path)
             if (paramsVals) {
                 var _i = 1
