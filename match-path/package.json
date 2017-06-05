@@ -1,6 +1,6 @@
 {
   "name": "match-path",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": " matching for path and query parameters, 根据路径和正则匹配返回匹配结果",
   "main": "MatchPath.js",
   "scripts": {

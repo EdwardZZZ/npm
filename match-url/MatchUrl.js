@@ -39,7 +39,7 @@ var MatchUrl = {
                 paramKeys[paramKeys.length] = { key: arguments[1] }
                 return '([^\/]+)'
             })
-        if (paramKeys.length === 0) return
+        if (paramKeys.length === 0) return {}
         return {
             paramReg: paramReg,
             paramKeys: paramKeys
